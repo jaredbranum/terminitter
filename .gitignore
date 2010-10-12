@@ -1,0 +1,8 @@
+# key files
+terminitter.keys
+terminitter.oauth
+
+# dumb files
+*.swp
+.DS_Store
+._*
