@@ -2,6 +2,9 @@
 terminitter.keys
 terminitter.oauth
 
+# compiled python modules
+*.pyc
+
 # dumb files
 *.swp
 .DS_Store
