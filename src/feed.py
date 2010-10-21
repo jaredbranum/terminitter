@@ -1,5 +1,8 @@
 # feed module for terminitter
 
+from view import print_tweet
+from time import sleep
+
 class Feed:
   MAX_TWEETS = 50
 
@@ -18,4 +21,11 @@ class Feed:
     if tweets:
       self.last_tweet_id = tweets[0]['id']
     return tweets
+
+  def poll(self): # always run in a separate thread
+    while self.is_connected():
+      for tweet in reversed(self.newest_tweets()):
+        print_tweet(tweet)
+      sleep(30) # poll every 30 sec to stay under the API limit
+    
 
