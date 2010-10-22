@@ -6,10 +6,15 @@ from time import sleep
 class Feed:
   MAX_TWEETS = 50
 
-  def __init__(self, twitter):
+  def __init__(self, twitter, args):
     self.twitter = twitter
     self.connected = True
     self.last_tweet_id = 1
+    self.growl_enabled = args['growl']
+    self.color = args['256color']
+    if self.growl_enabled:
+      from growl import Growler
+      self.growl = Growler()
   
   def is_connected(self):
     return self.connected #TODO: self.connected
@@ -25,7 +30,9 @@ class Feed:
   def poll(self): # always run in a separate thread
     while self.is_connected():
       for tweet in reversed(self.newest_tweets()):
-        print_tweet(tweet)
+        print_tweet(tweet, self.color)
+        if self.growl_enabled:
+          self.growl.alert('hi', 'hello')
       sleep(30) # poll every 30 sec to stay under the API limit
     
 
