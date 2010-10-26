@@ -17,7 +17,7 @@ class Feed:
       self.growl = Growler()
   
   def is_connected(self):
-    return self.connected #TODO: self.connected
+    return self.connected # TODO: self.connected
   
   def newest_tweets(self):
     tweets = self.twitter.GetHomeTimeline(
@@ -29,10 +29,11 @@ class Feed:
 
   def poll(self): # always run in a separate thread
     while self.is_connected():
+      ltid = self.last_tweet_id
       for tweet in reversed(self.newest_tweets()):
         print_tweet(tweet, self.color)
-        if self.growl_enabled:
-          self.growl.alert('hi', 'hello')
+        if self.growl_enabled:# && ltid != 1:
+          self.growl.alert(tweet)
       sleep(30) # poll every 30 sec to stay under the API limit
     
 

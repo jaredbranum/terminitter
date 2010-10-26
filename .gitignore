@@ -2,6 +2,9 @@
 terminitter.keys
 terminitter.oauth
 
+# images
+images/*
+
 # compiled python modules
 *.pyc
 

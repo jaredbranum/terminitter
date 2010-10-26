@@ -6,12 +6,19 @@ from datetime import datetime, timedelta
 # TODO: switch view to use curses
 
 TWEET_COLOR = '\033[0m'
-USERNAME_COLOR = '\033[38;5;39m' # TODO: change to twitter logo color (or close)
+USERNAME_COLOR = '\033[0;36m' # TODO: change to twitter logo color (or close)
 AT_SIGN_COLOR = '\033[1;37m'
 TIME_COLOR = '\033[0;37m'
 TIME_BRACKET_COLOR = '\033[1;30m'
-SEPARATOR_COLOR = '\033[38;5;172m'
+SEPARATOR_COLOR = '\033[1;35m'
 NO_COLOR = '\033[0m'
+
+TWEET_COLOR_256 = '\033[0m'
+USERNAME_COLOR_256 = '\033[38;5;39m' # TODO: change to twitter logo color (or close)
+AT_SIGN_COLOR_256 = '\033[1;37m'
+TIME_COLOR_256 = '\033[0;37m'
+TIME_BRACKET_COLOR_256 = '\033[1;30m'
+SEPARATOR_COLOR_256 = '\033[38;5;172m'
 
 def print_tweet(tweet, full_color=False):
   user = tweet['user']['screen_name']
@@ -20,16 +27,24 @@ def print_tweet(tweet, full_color=False):
   #import pdb; pdb.set_trace()
   if full_color: # 256 colors
     print (
-      TIME_BRACKET_COLOR+'['+NO_COLOR+
-      TIME_COLOR+ttime+NO_COLOR+
-      TIME_BRACKET_COLOR+'] '+NO_COLOR+
-      AT_SIGN_COLOR+'@'+NO_COLOR+
-      USERNAME_COLOR+user+NO_COLOR+
-      SEPARATOR_COLOR+' > '+NO_COLOR+
-      TWEET_COLOR+text+NO_COLOR
+      TIME_BRACKET_COLOR_256 + '[' + NO_COLOR + 
+      TIME_COLOR_256 + ttime + NO_COLOR + 
+      TIME_BRACKET_COLOR_256 + '] ' + NO_COLOR + 
+      AT_SIGN_COLOR_256 + '@' + NO_COLOR + 
+      USERNAME_COLOR_256 + user + NO_COLOR + 
+      SEPARATOR_COLOR_256 + ' > ' + NO_COLOR + 
+      TWEET_COLOR_256 + text + NO_COLOR
     )
   else: # TODO: 16 colors
-    print 'whatever'
+    print (
+      TIME_BRACKET_COLOR + '[' + NO_COLOR + 
+      TIME_COLOR + ttime + NO_COLOR + 
+      TIME_BRACKET_COLOR + '] ' + NO_COLOR + 
+      AT_SIGN_COLOR + '@' + NO_COLOR + 
+      USERNAME_COLOR + user + NO_COLOR + 
+      SEPARATOR_COLOR + ' > ' + NO_COLOR + 
+      TWEET_COLOR + text + NO_COLOR
+    )
     
 def format_tweet_time(tweettime):
   # TODO: detect timezone and dst rather than hardcode to EST
